@@ -8,3 +8,7 @@ DATA_INGESTION_S3_DATA_NAME: str = "RoboflowImages.zip"
 DATA_INGESTION_S3_BUCKET_NAME: str = "mlops-object-data"
 
 """DATA validation realated Constants"""
+DATA_VALIDATION_DIR_NAME = "data_validation"
+DATA_VALIDATION_STATUS_FILE = "status.txt"
+DATA_VALIDATION_REQUIRED_FILES = ["images", "labels",  "train.txt", "val.txt"]
+

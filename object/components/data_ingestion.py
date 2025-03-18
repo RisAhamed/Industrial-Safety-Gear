@@ -2,7 +2,7 @@ import os
 import sys
 from object.logger import logging
 from pathlib import Path
-from six.moves import urllib
+# from six.moves import urllib
 import zipfile
 import numpy as np
 from object.exception import objException
