@@ -34,3 +34,10 @@ class DataValidationConfig:
     valid_status_file_dir: str = os.path.join(data_validation_dir, DATA_VALIDATION_STATUS_FILE)
     required_file_list = DATA_VALIDATION_REQUIRED_FILES
 
+@dataclass
+class ModelTrainerConfig:
+    model_trainer_dir:str =os.path.join(training_pipeline_config.artifacts_dir,MODEL_TRAINER_DIR
+    )
+    model_weights_url :str =MODEL_TRAINER_PRETRAINED_WEIGHTS_URL
+    model_epochs :str = MODEL_TRAINER_EPOCHS
+    model_batch_size :str = MODEL_TRAINER_BATCH_SIZE

@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['head', 'helmet', 'person']
+
+roboflow:
+  workspace: objectdetection-twsk1
+  project: hard-hat-sample-tgrnp
+  version: 1
+  license: Public Domain
+  url: https://app.roboflow.com/objectdetection-twsk1/hard-hat-sample-tgrnp/1

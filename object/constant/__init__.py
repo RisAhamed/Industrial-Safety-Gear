@@ -12,3 +12,8 @@ DATA_VALIDATION_DIR_NAME = "data_validation"
 DATA_VALIDATION_STATUS_FILE = "status.txt"
 DATA_VALIDATION_REQUIRED_FILES = ["images", "labels",  "train.txt", "val.txt"]
 
+"""MODEL TRAINER RELATED CONSTANTS"""
+MODEL_TRAINER_DIR:str = "model_trainer"  
+MODEL_TRAINER_PRETRAINED_WEIGHTS_URL:str = "https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt"
+MODEL_TRAINER_EPOCHS: int = 2
+MODEL_TRAINER_BATCH_SIZE: int = 8

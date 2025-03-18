@@ -9,6 +9,7 @@ class DataIngestionArtifact:
 @dataclass
 class DataValidationArtifact:
     validation_status: bool
+    data_ingestion_artifact: DataIngestionArtifact  # Add this line
 
 @dataclass
 class ModelTrainerArtifact:

@@ -51,12 +51,15 @@ class DataValidation:
 
 
     
-    def initiate_data_validation(self) -> DataValidationArtifact: 
-        logging.info("Entered initiate_data_validation method of DataValidation class")
-        try:
+    def initiate_data_validation(self) -> DataValidationArtifact:
+        try: 
+            
+            logging.info("Entered initiate_data_validation method of DataValidation class")
             status = self.validate_all_files_exist()
             data_validation_artifact = DataValidationArtifact(
-                validation_status=status)
+                validation_status=status,
+                data_ingestion_artifact=self.data_ingestion_artifact  # Add this line
+            )
 
             logging.info("Exited initiate_data_validation method of DataValidation class")
             logging.info(f"Data validation artifact: {data_validation_artifact}")
@@ -67,4 +70,4 @@ class DataValidation:
             return data_validation_artifact
 
         except Exception as e:
-            raise objException(e, sys)
+            raise objException(e, sys)  
