@@ -41,3 +41,8 @@ class ModelTrainerConfig:
     model_weights_url :str =MODEL_TRAINER_PRETRAINED_WEIGHTS_URL
     model_epochs :str = MODEL_TRAINER_EPOCHS
     model_batch_size :str = MODEL_TRAINER_BATCH_SIZE
+
+@dataclass
+class ModelPusherConfig:
+    model_bucket_name:str = MODEL_S3_BUCKET_NAME
+    s3_key:str = S3_MODEL_NAME

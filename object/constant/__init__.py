@@ -17,3 +17,7 @@ MODEL_TRAINER_DIR:str = "model_trainer"
 MODEL_TRAINER_PRETRAINED_WEIGHTS_URL:str = "https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt"
 MODEL_TRAINER_EPOCHS: int = 1
 MODEL_TRAINER_BATCH_SIZE: int = 8
+
+"""MODEL PUSHER RELATED CONSTANTS"""
+MODEL_S3_BUCKET_NAME :str = "mlops-object-data"
+S3_MODEL_NAME: str ="best.pt"
