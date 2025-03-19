@@ -204,11 +204,12 @@ class ModelTrainer:
             # Change directory to yolov7 and run the training command
             train_cmd = [
                 "python", "train.py",
-                "--batch", str(self.model_trainer_config.model_batch_size),
+                "--batch", str(max(2, self.model_trainer_config.model_batch_size // 4)),  # Adjusted for CPU
                 "--cfg", "cfg/training/custom_yolov7.yaml",
-                "--epochs", str(self.model_trainer_config.model_epochs),
+                "--epochs", str(min(50, self.model_trainer_config.model_epochs)),         # Reduced for CPU
                 "--data", "data/custom.yaml",
-                "--weights", "yolov7.pt"
+                "--weights", "yolov7.pt",
+                "--device", "cpu"  # Ensures CPU usage
             ]
             
             logging.info(f"Running training command: {' '.join(train_cmd)}")
@@ -217,16 +218,31 @@ class ModelTrainer:
             # Copy the best model
             os.makedirs(self.model_trainer_config.model_trainer_dir, exist_ok=True)
             
-            # Use shutil for file operations instead of system commands
-            best_model_path = os.path.join("yolov7", "runs", "train", "exp", "weights", "best.pt")
-            if os.path.exists(best_model_path):
-                shutil.copy(best_model_path, "yolov7/")
-                shutil.copy(best_model_path, self.model_trainer_config.model_trainer_dir)
-                logging.info(f"Copied best model to {self.model_trainer_config.model_trainer_dir}")
+            # Get the latest experiment directory (could be exp, exp1, exp2, etc.)
+            runs_dir = os.path.join("yolov7", "runs", "train")
+            if os.path.exists(runs_dir):
+                exp_dirs = [d for d in os.listdir(runs_dir) if d.startswith("exp")]
+                if exp_dirs:
+                    # Sort to get the latest experiment directory
+                    latest_exp = sorted(exp_dirs)[-1]
+                    best_model_path = os.path.join(runs_dir, latest_exp, "weights", "best.pt")
+                    
+                    logging.info(f"Looking for best model at: {best_model_path}")
+                    
+                    if os.path.exists(best_model_path):
+                        # Copy the model to yolov7 directory and model_trainer_dir
+                        shutil.copy(best_model_path, "yolov7/")
+                        shutil.copy(best_model_path, self.model_trainer_config.model_trainer_dir)
+                        logging.info(f"Copied best model to {self.model_trainer_config.model_trainer_dir}")
+                    else:
+                        logging.error(f"Best model not found at {best_model_path}")
+                else:
+                    logging.error("No experiment directories found in runs/train")
             else:
-                logging.error(f"Best model not found at {best_model_path}")
+                logging.error(f"Runs directory not found at {runs_dir}")
 
             # Clean up - use shutil and os for Windows compatibility
+            # IMPORTANT: Only clean up AFTER copying the model files
             if os.path.exists("yolov7/runs"):
                 shutil.rmtree("yolov7/runs")
             
