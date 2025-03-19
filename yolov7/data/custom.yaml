@@ -1,0 +1,10 @@
+# YOLOv7 configuration
+            train: C:\Users\riswa\Desktop\industry-safety-yolo\train.txt
+            val: C:\Users\riswa\Desktop\industry-safety-yolo\val.txt
+            test: C:\Users\riswa\Desktop\industry-safety-yolo\val.txt
+            
+            # number of classes
+            nc: 3
+            
+            # class names
+            names: ['class0', 'class1', 'class2']
